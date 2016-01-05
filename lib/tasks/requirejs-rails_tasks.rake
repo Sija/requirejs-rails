@@ -31,6 +31,8 @@ namespace :requirejs do
     end
   end
 
+  Rails.application.config.cache_classes = false
+
   requirejs = ActiveSupport::OrderedOptions.new
   path_extension_pattern = Regexp.new("\\.(\\w+)\\z")
 
