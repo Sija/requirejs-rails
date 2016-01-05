@@ -162,8 +162,8 @@ OS X Homebrew users can use 'brew install node'.
         built_asset_path = requirejs.config.build_dir.join(asset_name)
 
         # Compute the digest based on the contents of the compiled file, *not* on the contents of the RequireJS module.
-        file_digest = (::Rails.application.assets || ::Sprockets::Railtie.build_environment(::Rails.application)).file_digest(built_asset_path.to_s)
-        hex_digest = Sprockets::DigestUtils.pack_hexdigest(file_digest)
+        file_digest = requirejs.env.file_digest(built_asset_path.to_s)
+        hex_digest = file_digest.unpack("H*").first
         digest_name = asset.logical_path.gsub(path_extension_pattern) { |ext| "-#{hex_digest}#{ext}" }
 
         digest_asset_path = requirejs.config.target_dir + digest_name
